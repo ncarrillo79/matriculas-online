@@ -1,129 +1,98 @@
-﻿# matriculas-online
- # Sistema de Matrículas Online
+# 🏫 Sistema de Matrículas Online
 
-## 📌 Descrição do Projeto
-O **Sistema de Matrículas Online** é uma aplicação fullstack desenvolvida com **Vue.js** no frontend e **Node.js + Express + TypeScript** no backend.  
-O sistema permite:
-
-- Cadastro de alunos em cursos via formulário.
-- Validação de dados do aluno antes de salvar.
-- Listagem e gerenciamento de cursos.
-- Painel administrativo para visualizar matrículas e cursos.
-
-O projeto segue os requisitos especificados: integração Vue + API, feedback visual no frontend, validações de formulário, e uso de TypeScript para tipagem segura.
+[![Node.js](https://img.shields.io/badge/Node.js-18.x-green)](https://nodejs.org/)
+[![Vue.js](https://img.shields.io/badge/Vue.js-3.x-brightgreen)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
 
 ---
 
-## 🏗 Arquitetura do Projeto
+## 📌 Descrição
+Sistema web para cadastro de alunos em cursos online, com painel administrativo para gerenciar **matrículas** e **cursos**.  
+- **Frontend:** Vue.js 3 + Vite  
+- **Backend:** Node.js + Express + TypeScript  
+- **Banco de dados:** PostgreSQL  
 
-### Estrutura geral
+---
+
+## 🏗 Estrutura do Projeto
+
 
 matriculas-online/
-│
 ├─ frontend/ # Aplicação Vue.js
 │ ├─ src/
-│ │ ├─ views/ # Telas do sistema (Home, Matricula, Admin)
-│ │ ├─ components/ # Componentes reutilizáveis (Formulário, Admin)
-│ │ ├─ App.vue
+│ │ ├─ views/ # Telas: Home, Formulário, Admin
+│ │ ├─ components/ # Componentes reutilizáveis
 │ │ └─ main.ts
-│ ├─ package.json
-│ └─ .gitignore
-│
-├─ backend/ # API Node.js + Express + TypeScript
+├─ backend/ # API Node + Express + TypeScript
 │ ├─ src/
-│ │ ├─ controllers/ # Lógica das rotas (Matriculas, Cursos)
-│ │ ├─ routes/ # Definição das rotas
-│ │ ├─ db.ts # Conexão com PostgreSQL
-│ │ └─ server.ts # Inicialização do servidor
-│ ├─ package.json
-│ └─ tsconfig.json
-│
+│ │ ├─ controllers/ # Lógica das rotas
+│ │ ├─ routes/ # Rotas definidas
+│ │ ├─ db.ts # Conexão PostgreSQL
+│ │ └─ server.ts
 └─ README.md
 
 
 ---
 
-## ⚡ Tecnologias Utilizadas
-- **Frontend:** Vue.js 3, Composition API, Vue Router
-- **Backend:** Node.js, Express, TypeScript
-- **Banco de Dados:** PostgreSQL
-- **Ferramentas:** Vite (frontend), ts-node (backend)
+## 🚀 Como Rodar
 
----
-
-## 🚀 Como Rodar o Projeto
-
-### 1. Clonar o repositório
+### 1️⃣ Clonar o projeto
 ```bash
 git clone <URL_DO_REPOSITORIO>
 cd matriculas-online
-2. Configurar o Backend
+2️⃣ Backend
 cd backend
-npm install       # instala dependências
-cp .env.example .env  # configurar variáveis de ambiente (DB_HOST, DB_USER, DB_PASS, DB_NAME)
-npm run dev       # inicia o servidor em http://localhost:3000
-3. Configurar o Frontend
+npm install
+cp .env.example .env   # configure suas variáveis: DB_HOST, DB_USER, DB_PASS, DB_NAME
+npm run dev             # servidor em http://localhost:3000
+3️⃣ Frontend
 cd ../frontend
-npm install       # instala dependências
-npm run dev       # inicia o frontend em http://localhost:5173
+npm install
+npm run dev             # frontend em http://localhost:5173
 
-Certifique-se de que o backend esteja rodando antes de acessar o frontend, pois ele faz chamadas à API para cursos e matrículas.
+⚠️ Certifique-se de que o backend esteja rodando antes do frontend.
 
 📝 Funcionalidades
 Frontend
 
-Formulário de matrícula com:
+Formulário de matrícula com validação instantânea
 
-Nome, Email, Telefone, Curso
+Listagem dinâmica de cursos via API
 
-Validações imediatas e feedback visual
+Feedback visual (mensagens de sucesso ou erro)
 
-Listagem de cursos disponíveis no formulário
-
-Mensagens de sucesso ou erro ao enviar matrícula
-
-Navegação entre Home, Formulário e Painel Admin
+Painel admin para matrículas e cursos
 
 Backend
 
-Rotas:
+Rotas REST:
 
-GET /cursos → lista cursos disponíveis
+GET /cursos → lista cursos
 
-POST /matricula → cadastra novo aluno
+POST /matricula → cadastra aluno
 
-GET /matriculas → lista matrículas (admin)
+GET /matriculas → lista matrículas
 
-Validação de dados usando TypeScript
+Tipagem com TypeScript
 
-Respostas com códigos HTTP adequados (201, 400, etc)
+Respostas HTTP corretas (201, 400, etc)
 
 Painel Administrativo
 
-Listagem de matrículas:
+Matrículas: Nome, Email, Telefone, Curso, Data (DD/MM/AAAA)
 
-Nome, Email, Telefone, Curso, Data da matrícula (formato DD/MM/AAAA)
-
-Listagem de cursos:
-
-Nome, Descrição, Data da próxima turma
+Cursos: Nome, Descrição, Próxima Turma
 
 Layout organizado e responsivo
 
-🛠 Configurações do Banco de Dados
-
-O backend utiliza PostgreSQL.
-
-Tabelas principais:
-
--- Cursos
+🛠 Banco de Dados (PostgreSQL)
 CREATE TABLE cursos (
   id SERIAL PRIMARY KEY,
   nome VARCHAR(100) NOT NULL,
   descricao TEXT
 );
 
--- Matrículas
 CREATE TABLE matriculas (
   id SERIAL PRIMARY KEY,
   nome VARCHAR(100) NOT NULL,
@@ -132,29 +101,20 @@ CREATE TABLE matriculas (
   curso_id INTEGER REFERENCES cursos(id),
   created_at TIMESTAMP DEFAULT NOW()
 );
-
-Ajuste conforme suas necessidades. Campos adicionais como proxima_data podem ser adicionados.
-
-✅ Git e .gitignore
-
-Cada pasta (frontend e backend) possui seu próprio .gitignore.
-
-Arquivos como node_modules, .env e dist estão ignorados.
-
 💡 Observações
 
-Esse projeto é um protótipo funcional, pronto para testes locais.
+Cada pasta (frontend, backend) possui seu próprio .gitignore (ignora node_modules, .env, dist)
 
-Para produção, configure variáveis de ambiente e segurança adicional.
+Datas exibidas no painel admin: DD/MM/AAAA
 
-Pode ser estendido com autenticação, filtros, edição de cursos e matrículas.
+Projeto pronto para testes locais; para produção configure variáveis de ambiente e segurança adicional.
 
-🌐 Endpoints da API (Exemplos)
+🌐 Endpoints da API
 Método	Rota	Descrição
 GET	/cursos	Lista todos os cursos
-POST	/matricula	Cria uma nova matrícula
-GET	/matriculas	Lista todas as matrículas
-📅 Formato de Data
+POST	/matricula	Cria nova matrícula
+GET	/matriculas	Lista todas matrículas
 
-As datas exibidas no painel admin estão no formato DD/MM/AAAA para facilitar a leitura.
+
+
 
